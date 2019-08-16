@@ -33,36 +33,26 @@ def getRandomVinStart(vinStart):
     return ''.join(vinStart_list)
 
 def runner():
-    inp = ''
-    is_valid = False
-    recursion_depth = 1
-    while True:
-        if is_valid:
-            break
-        inp = input('Enter the last 6 OR 8 characters of the VIN.')
+    # is_valid = False
+    # recursion_depth = 1
+    i = 0
+    out_file = open('16CharVin' , 'w+')
+    while i < 5000:
+        is_valid = False
+        recursion_depth = 1
         while True:
-            if len(inp) == 6:
-                vinStart = 'CPH________'
-                first_part = getRandomVinStart(vinStart)
-                vin = first_part + inp
-                valid = ValidateVIN(vin)
-                if valid[0]:
-                    is_valid = True
-                    break
-            elif len(inp) == 8:
-                vinStart = 'CPH______'
-                first_part = getRandomVinStart(vinStart)
-                vin = first_part + inp
-                valid = ValidateVIN(vin)
-                if valid[0]:
-                    is_valid = True
-                    break
-            else:
-                print('Error: Input must be 6 OR 8 characters long.')
-            
+            vinStart = '________3________'
+            first_part = getRandomVinStart(vinStart)
+            vin = first_part
+            valid = ValidateVIN(vin)
+            if valid[0]:
+                is_valid = True
+                break
             recursion_depth += 1
     
-    print('The vin, {0}, was generated with a recursion depth of {1}'.format(valid[1], recursion_depth))
+        out_file.write('The vin, {0}, was generated with a recursion depth of {1}\n'.format(valid[1], recursion_depth))
+        # print('The vin, {0}, was generated with a recursion depth of {1}'.format(valid[1], recursion_depth))
+        i += 1
     # print(vin)
     
 if __name__ == '__main__':
